@@ -33,7 +33,7 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
       ),
       body: QRView(
         key: qrKey,
-        onQRViewCreated: _onQRViewCreated,
+        onQRViewCreated: onQRViewCreated,
         overlay: QrScannerOverlayShape(
           borderColor: primaryColor,
           borderRadius: 16,
@@ -45,7 +45,7 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
     );
   }
 
-  void _onQRViewCreated(QRViewController controller) {
+  void onQRViewCreated(QRViewController controller) {
     this.controller = controller;
 
     controller.scannedDataStream.listen((scanData) {
@@ -54,11 +54,5 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
         Navigator.pop(context, scanData.code);
       }
     });
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
   }
 }

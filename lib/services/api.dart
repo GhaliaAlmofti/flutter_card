@@ -100,28 +100,21 @@ class Api {
 Future<http.StreamedResponse> upload(File file, String endPoint) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString("token");
-
-
   var request = http.MultipartRequest('POST', Uri.parse("$baseUrl$endPoint"));
-
   request.headers.addAll({
     "Accept": "application/json",
     "Authorization": "Bearer $token",
   });
-
   var multipartFile = await http.MultipartFile.fromPath(
     'file', 
     file.path,
   );
   request.files.add(multipartFile);
-
   final response = await request.send();
-
   if (kDebugMode) {
     print("RESPONSE UPLOAD : $baseUrl$endPoint");
     print("RESPONSE STATUS CODE : ${response.statusCode}");
   }
-
   return response;
 }
 }

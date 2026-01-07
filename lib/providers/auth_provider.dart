@@ -102,9 +102,8 @@ class AuthProvider extends BaseProvider {
 
   Future<List> validateWalletQr(String qrCode) async {
     setBusy(true);
-
     try {
-      await Future.delayed(const Duration(milliseconds: 800));
+      await Future.delayed(const Duration(milliseconds: 300));
       lastScannedValue = qrCode;
       setBusy(false);
       notifyListeners();
